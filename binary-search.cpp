@@ -36,17 +36,14 @@ int binary_search(vector<int> ary, int k, string method) {
     return right;
 }
 
-void call_functions(vector<int> ary, int key, string method) {
-    cout << method  << " for " << key << " is index = " << binary_search(ary, key, method) << endl;
-}
-
 int main() {
     vector<int> test_array{1,2,5,5,7,10,22};
     cout << "array = 1, 2, 5, 5, 7, 10, 22" << endl;
     for (string method: {"binary_search", "lower_bound", "upper_bound"}) {
         cout << endl;
         for (int key : {5, 6, 7, 10, 12}) {
-            call_functions(test_array, key, method);
+            cout << method  << " for " << key << " is index = "
+                 << binary_search(test_array, key, method) << endl;
         }
     }
 }
