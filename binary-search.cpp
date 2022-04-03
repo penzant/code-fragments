@@ -16,15 +16,7 @@ bool comp_upper_bound(int v, int k) {
     else return false;
 }
 
-int binary_search(vector<int> ary, int k, string method) {
-    bool (*comp)(int, int);
-    if (method == "binary_search") {
-        comp = &comp_binary_search;
-    } else if (method == "lower_bound") {
-        comp = &comp_lower_bound;
-    } else if (method == "upper_bound") {
-        comp = &comp_upper_bound;
-    }
+int binary_search(vector<int> ary, int k, bool (*comp)(int, int)) {
     int left = -1, right = ary.size();
     while (right - left > 1) {
         int mid = left + (right - left) / 2;
@@ -39,11 +31,15 @@ int binary_search(vector<int> ary, int k, string method) {
 int main() {
     vector<int> test_array{1,2,5,5,7,10,22};
     cout << "array = 1, 2, 5, 5, 7, 10, 22" << endl;
-    for (string method: {"binary_search", "lower_bound", "upper_bound"}) {
-        cout << endl;
+    vector<pair<string, bool (*)(int, int)> > methods{
+        make_pair("lower_bound", &comp_lower_bound),
+        make_pair("upper_bound", &comp_upper_bound),
+        make_pair("binary_search", &comp_binary_search),
+    };
+    for (auto p: methods) {
         for (int key : {5, 6, 7, 10, 12}) {
-            cout << method  << " for " << key << " is index = "
-                 << binary_search(test_array, key, method) << endl;
+            cout << p.first  << " for " << key << " is index = "
+                 << binary_search(test_array, key, p.second) << endl;
         }
     }
 }
