@@ -22,7 +22,7 @@ void test_binary_search(string method, bool (*func)(int, int)) {
 }
 
 int main() {
-    test_binary_search("binary_search", [](int v, int k) { return v > k; });
-    test_binary_search("lower_bound", [](int v, int k) { return v == k; });
-    test_binary_search("upper_bound", [](int v, int k) { return v >= k; });
+    test_binary_search("binary_search", [](int v, int k) { return v == k; });
+    test_binary_search("lower_bound", [](int v, int k) { return v >= k; });
+    test_binary_search("upper_bound", [](int v, int k) { return v > k; });
 }
